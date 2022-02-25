@@ -1,0 +1,7 @@
+.block {
+  @apply overflow-hidden border text-10 flex flex-col cursor-pointer;
+}
+
+.active {
+  @apply bg-gray-700 h-full w-full;
+}

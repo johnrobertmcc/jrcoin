@@ -1,0 +1,5 @@
+.cardGrid {
+  @apply border border-black grid grid-cols-5 gap-5;
+
+  min-height: 700px;
+}
