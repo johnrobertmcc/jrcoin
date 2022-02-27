@@ -1,4 +1,3 @@
-import styles from "./Layout.module.css";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import { useRef, useState, useEffect } from "react";
