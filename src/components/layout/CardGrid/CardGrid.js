@@ -1,5 +1,5 @@
 import { useAppContext } from "../../../context";
-import styles from "./CardGrid.module.css";
+
 import Container from "../../util/Container";
 import Card from "./Card";
 
