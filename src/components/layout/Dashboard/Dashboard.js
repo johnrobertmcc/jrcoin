@@ -28,7 +28,11 @@ export default function Dashboard() {
   const formValues = ["From Address", "To Address", "Amount"];
   const [transaction, setTransaction] = useState(defaultTX);
 
-  function addNewTransaction(e) {
+  /**
+   * Handle Submit for form to add new transaction.
+   *
+   */
+  function handleSubmit(e) {
     e.preventDefault();
     const tx = new Transaction(
       transaction?.fromAddress,
@@ -40,6 +44,10 @@ export default function Dashboard() {
     setTransaction(defaultTX);
   }
 
+  /**
+   * Handle Change for inputs to add new transaction details.
+   *
+   */
   function handleChange(e, value) {
     e.preventDefault();
 
@@ -48,13 +56,11 @@ export default function Dashboard() {
     });
   }
 
-  console.log("jr transaction", transaction);
-
   return (
     <Wrapper theme="primary">
       <Container paddingX={false} className={"dashboard"}>
         <div className={styles.txForm}>
-          <form onSubmit={(e) => addNewTransaction(e)}>
+          <form onSubmit={(e) => handleSubmit(e)}>
             {Object.keys(defaultTX).map((value, i) => {
               return (
                 <input

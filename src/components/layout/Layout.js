@@ -6,6 +6,7 @@ import Wrapper from "../util/Wrapper";
 import CardGrid from "./CardGrid/CardGrid";
 import Transactions from "./Transactions/Transactions";
 import Dashboard from "./Dashboard";
+import Loading from "./Loading/Loading";
 
 /**
  * Renders the Default Layout of the dapp.
@@ -30,11 +31,17 @@ export default function Layout() {
     <>
       <NavBar loading={loading} />
       <Wrapper tag="main" className={"content"}>
-        <Dashboard />
-        <CardGrid />
-        <Transactions />
+        {loading ? (
+          <Loading loading={loading} />
+        ) : (
+          <>
+            <Dashboard />
+            <CardGrid />
+            <Transactions />
+          </>
+        )}
       </Wrapper>
-      <Footer loading={loading} />
+      <Footer />
     </>
   );
 }

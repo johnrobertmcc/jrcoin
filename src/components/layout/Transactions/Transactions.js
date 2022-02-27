@@ -6,9 +6,9 @@ import { useState, useEffect } from "react";
 import { shortenAddress } from "../../../functions";
 
 /**
- * Renders the recent transactions found on the Window.
+ * Renders the recent transactions found on the blockchain.
  *
- * @return {Element}             The Transactions component.
+ * @return {Element}   The Transactions component.
  */
 export default function Transactions() {
   const { blocks, activeBlock } = useAppContext();
@@ -27,7 +27,7 @@ export default function Transactions() {
             <h2>Block Transactions</h2>
           </div>
           <>
-            {block ? (
+            {activeBlock !== 0 && block ? (
               <div className={styles.transactionContainer}>
                 <table className={styles.transactions}>
                   <thead>
@@ -37,21 +37,25 @@ export default function Transactions() {
                       <th>To Address</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {block.transactions.map((transaction, i) => {
-                      return (
-                        <tr key={i} className={styles.tableRow}>
-                          <td>{transaction.amount}</td>
-                          <td>
-                            {transaction?.fromAddress
-                              ? shortenAddress(transaction.fromAddress)
-                              : "Server"}
-                          </td>
-                          <td>{shortenAddress(transaction.toAddress)}</td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
+                  {!!block?.transactions?.length && (
+                    <tbody>
+                      {block.transactions.map((transaction, i) => {
+                        return (
+                          <tr key={i} className={styles.tableRow}>
+                            <td>{transaction.amount}</td>
+                            <td>
+                              {transaction?.fromAddress
+                                ? shortenAddress(transaction.fromAddress)
+                                : "Server"}
+                            </td>
+                            {transaction?.toAddress && (
+                              <td>{shortenAddress(transaction.toAddress)}</td>
+                            )}
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  )}
                 </table>
               </div>
             ) : (
