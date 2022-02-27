@@ -6,6 +6,10 @@ const ec = new EC("secp256k1");
 
 let GlobalBlockchain = null;
 
+/**
+ * Function used to create a new blockchain.
+ *
+ */
 function genesis() {
   GlobalBlockchain = new Blockchain();
   console.log("blockchain created");
@@ -22,9 +26,9 @@ export function useAppContext() {
 }
 
 /**
- * The wrapper for the dapp containing the context.
+ * The wrapper for the context of the blockchain.
  *
- * @return {Element}   The TransactionProvider component.
+ * @return {Element}   The BlockchainProvider component.
  */
 export function BlockchainProvider({ children }) {
   const yourKey = ec.keyFromPrivate(
@@ -54,6 +58,9 @@ export function BlockchainProvider({ children }) {
     }
   }, []);
 
+  /**
+   * Function used to add a specified transaction to the GlobalBlockchain.
+   */
   function addTransactionToBlock(transaction) {
     transaction.signTransaction(yourKey);
     GlobalBlockchain.addTransaction(transaction);
@@ -61,6 +68,9 @@ export function BlockchainProvider({ children }) {
     addToLocalStorage(GlobalBlockchain);
   }
 
+  /**
+   * Function used to mine the latest block and add the transactions to the blockchain.
+   */
   function mineBlock() {
     GlobalBlockchain.minePendingTransactions(walletAddress);
     setBlocks(new Array(...GlobalBlockchain?.chain));
