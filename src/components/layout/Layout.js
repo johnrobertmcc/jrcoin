@@ -5,6 +5,7 @@ import { useRef, useState, useEffect } from "react";
 import Wrapper from "../util/Wrapper";
 import CardGrid from "./CardGrid/CardGrid";
 import Transactions from "./Transactions/Transactions";
+import Dashboard from "./Dashboard";
 
 /**
  * Renders the Default Layout of the dapp.
@@ -29,6 +30,7 @@ export default function Layout() {
     <>
       <NavBar loading={loading} />
       <Wrapper tag="main" className={"content"}>
+        <Dashboard />
         <CardGrid />
         <Transactions />
       </Wrapper>

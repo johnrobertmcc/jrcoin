@@ -1,7 +1,27 @@
 .block {
-  @apply overflow-hidden border text-10 flex flex-col cursor-pointer;
+  @apply overflow-hidden border h-full text-10 flex flex-col cursor-pointer max-h-full py-20 hover:bg-primary;
 }
 
 .active {
-  @apply bg-gray-700 h-full w-full;
+  @apply bg-secondary h-full w-full hover:bg-secondary;
+}
+
+.inner {
+  @apply grid grid-cols-1 text-center;
+}
+
+.genesis {
+  @apply text-center w-full text-h5 pb-10;
+}
+
+.genesisBlock {
+  @apply bg-primary cursor-default;
+}
+
+.created {
+  @apply w-full text-center;
+}
+
+.blockHash {
+  @apply w-full text-center text-16;
 }

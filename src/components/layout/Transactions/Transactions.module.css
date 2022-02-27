@@ -44,7 +44,7 @@ tr:nth-child(odd) {
 }
 
 .tableHeader {
-  @apply border bg-white text-center;
+  @apply border bg-secondary text-center;
 }
 
 .noTransactions {

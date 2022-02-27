@@ -11,11 +11,11 @@ module.exports = {
         limit: "1440px",
       },
       colors: {
-        primary: "#167B94",
-        secondary: "#98DBFF",
+        primary: "#f1f5f9",
+        secondary: "#dff1ff",
         tertiary: "#78B7F5",
-        accent: "#A85508",
-        warning: "#F5953D",
+        accent: "##98dbff",
+        warning: "#0a4870",
         input: "#8B9699",
       },
       fontSize: {

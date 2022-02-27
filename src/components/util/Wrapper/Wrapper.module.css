@@ -3,7 +3,7 @@
 }
 
 .primary {
-  @apply bg-primary;
+  @apply bg-primary bg-opacity-40;
 }
 
 .noPaddingTop {

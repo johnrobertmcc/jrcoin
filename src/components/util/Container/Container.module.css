@@ -34,3 +34,13 @@
 .noWallet {
   @apply flex min-h-screen w-full flex-col items-center justify-center text-center text-black;
 }
+
+.dashboard {
+  @apply w-full grid grid-cols-3 md:grid-cols-4;
+}
+
+.cardGrid {
+  @apply grid grid-cols-3 md:grid-cols-5 gap-2;
+
+  min-height: 100%;
+}

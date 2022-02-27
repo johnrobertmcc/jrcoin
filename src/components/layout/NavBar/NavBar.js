@@ -1,6 +1,8 @@
 import styles from "./NavBar.module.css";
 import Container from "../../util/Container";
 import Wrapper from "../../util/Wrapper";
+import { shortenAddress } from "../../../functions";
+import { useAppContext } from "../../../context";
 
 /**
  * The dapp's header.
@@ -8,6 +10,7 @@ import Wrapper from "../../util/Wrapper";
  * @return {Element} The NavBar component.
  */
 export default function NavBar() {
+  const { walletAddress } = useAppContext();
   return (
     <Wrapper className={"siteHeader"} pt={false} tag="header">
       <h1 className="sr-only">Blockchain by J.R..</h1>
@@ -19,7 +22,11 @@ export default function NavBar() {
             className={styles.logoImg}
           />
         </button>
-        this sit he navbar
+        <p>
+          <span>Wallet Address:</span>
+          <br />
+          {shortenAddress(walletAddress)}
+        </p>
       </Container>
     </Wrapper>
   );

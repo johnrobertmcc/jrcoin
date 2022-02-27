@@ -35,5 +35,5 @@ export default function Container({
 }
 
 Container.defaultProps = {
-  paddingX: true,
+  paddingX: false,
 };

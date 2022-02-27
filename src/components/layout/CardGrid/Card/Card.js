@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import styles from "./Card.module.css";
-import { Transaction } from "blockchain/src/blockchain";
 import { useAppContext } from "../../../../context";
 import cn from "classnames";
+import { shortenAddress } from "../../../../functions";
 /**
  * Renders a card to display individual blocks.
  *
@@ -11,28 +11,40 @@ import cn from "classnames";
  * @return {Element}             The Card component.
  */
 export default function Card({ block, idx }) {
-  const {
-    walletAddress,
-    mineBlock,
-    addTransactionToBlock,
-    activeBlock,
-    setActiveBlock,
-  } = useAppContext();
-  const tx1 = new Transaction(walletAddress, "another wallet public key", 10);
+  const { activeBlock, setActiveBlock } = useAppContext();
 
+  if (idx === 0) {
+    return (
+      <li className={cn(styles.genesisBlock, styles.block)}>
+        <h4 className={styles.genesis}>Genesis Block</h4>
+        {block?.timestamp && (
+          <h4 className={styles.created}>
+            Created: <br />
+            {new Date(block.timestamp).toDateString()}
+          </h4>
+        )}
+      </li>
+    );
+  }
   return (
     <li
       className={cn(styles.block, idx === activeBlock && styles.active)}
       onClick={() => setActiveBlock(idx)}
     >
-      <h4>{block?.hash}</h4>
-      <div>
-        <p>Transactions: {block?.transactions?.length}</p>
-        <button onClick={() => addTransactionToBlock(tx1)}>
-          Add New Transaction
-        </button>
-
-        <button onClick={() => mineBlock()}>Mine This Block</button>
+      {block?.hash && (
+        <h4 className={styles.blockHash}>
+          Block Hash: {shortenAddress(block.hash)}
+        </h4>
+      )}
+      <div className={styles.inner}>
+        {block?.transactions && (
+          <p>
+            Transactions: <b>{block.transactions.length}</b>
+          </p>
+        )}
+        {block?.timestamp && (
+          <p>Created: {new Date(block.timestamp).toLocaleDateString()}</p>
+        )}
       </div>
     </li>
   );

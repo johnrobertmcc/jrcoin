@@ -1,8 +1,7 @@
-import PropTypes from "prop-types";
 import { useAppContext } from "../../../context";
 import styles from "./CardGrid.module.css";
+import Container from "../../util/Container";
 import Card from "./Card";
-import { useEffect } from "react";
 
 /**
  * Renders the CardGrid Component
@@ -13,11 +12,11 @@ export default function CardGrid() {
   const { blocks } = useAppContext();
 
   return (
-    <ul className={styles.cardGrid}>
+    <Container tag="ul" className="cardGrid">
       {blocks &&
         blocks.map((block, i) => {
           return <Card block={block} key={i} idx={i} />;
         })}
-    </ul>
+    </Container>
   );
 }

@@ -3,6 +3,7 @@ import Container from "../../util/Container/Container";
 import { useAppContext } from "../../../context/index";
 import Wrapper from "../../util/Wrapper/Wrapper";
 import { useState, useEffect } from "react";
+import { shortenAddress } from "../../../functions";
 
 /**
  * Renders the recent transactions found on the Window.
@@ -11,17 +12,15 @@ import { useState, useEffect } from "react";
  */
 export default function Transactions() {
   const { blocks, activeBlock } = useAppContext();
-  // console.log(transactions.length);
 
   const [block, setBlock] = useState(null);
 
   useEffect(() => {
     setBlock(blocks[activeBlock]);
   }, [activeBlock]);
-  console.log("new block", block.transactions);
 
   return (
-    <Wrapper className={styles.transactionWrap}>
+    <Wrapper className={styles.transactionWrap} theme="primary">
       <Container>
         <div className={styles.innerWrap}>
           <div className={styles.header}>
@@ -45,10 +44,10 @@ export default function Transactions() {
                           <td>{transaction.amount}</td>
                           <td>
                             {transaction?.fromAddress
-                              ? transaction.fromAddress
+                              ? shortenAddress(transaction.fromAddress)
                               : "Server"}
                           </td>
-                          <td>{transaction.toAddress}</td>
+                          <td>{shortenAddress(transaction.toAddress)}</td>
                         </tr>
                       );
                     })}
@@ -57,7 +56,7 @@ export default function Transactions() {
               </div>
             ) : (
               <div className={styles.noTransactions}>
-                <h3 className={styles.message}>No Transactions yet.</h3>
+                <h3 className={styles.message}>No Block Selected.</h3>
               </div>
             )}
           </>

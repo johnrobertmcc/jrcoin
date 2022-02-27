@@ -1,5 +1,6 @@
 import { useEffect, useState, createContext, useContext } from "react";
 import { Blockchain } from "blockchain/src/blockchain";
+import { addToLocalStorage, getFromLocalStorage } from "../functions";
 const EC = require("elliptic").ec;
 const ec = new EC("secp256k1");
 
@@ -34,24 +35,37 @@ export function BlockchainProvider({ children }) {
 
   const [blocks, setBlocks] = useState([]);
   const [activeBlock, setActiveBlock] = useState(0);
+  const [pendingTransactions, setPendingTransactions] = useState([]);
 
   useEffect(() => {
-    genesis();
-    GlobalBlockchain && setBlocks(GlobalBlockchain.chain);
-    console.log("blocks pulled to state");
+    if (getFromLocalStorage()) {
+      const persistedState = getFromLocalStorage();
+      console.log("local Storage pulled to state");
+      GlobalBlockchain = new Blockchain(
+        new Array(...persistedState.chain),
+        persistedState?.difficulty,
+        persistedState?.pendingTransactions,
+        persistedState?.miningReward
+      );
+      GlobalBlockchain && setBlocks(new Array(...persistedState.chain));
+    } else {
+      genesis();
+      GlobalBlockchain && setBlocks(new Array());
+    }
   }, []);
 
   function addTransactionToBlock(transaction) {
     transaction.signTransaction(yourKey);
     GlobalBlockchain.addTransaction(transaction);
-    console.log("GlobalBlockchain value", GlobalBlockchain);
+    setPendingTransactions(new Array(...GlobalBlockchain?.pendingTransactions));
+    addToLocalStorage(GlobalBlockchain);
   }
 
   function mineBlock() {
     GlobalBlockchain.minePendingTransactions(walletAddress);
-    console.log("GlobalBlockchain.chain", GlobalBlockchain.chain);
-    console.log("blocks", blocks);
-    setBlocks(new Array(...GlobalBlockchain.chain));
+    setBlocks(new Array(...GlobalBlockchain?.chain));
+    setPendingTransactions([]);
+    addToLocalStorage(GlobalBlockchain);
   }
 
   return (
@@ -64,6 +78,8 @@ export function BlockchainProvider({ children }) {
         addTransactionToBlock,
         activeBlock,
         setActiveBlock,
+        GlobalBlockchain,
+        pendingTransactions,
       }}
     >
       {children}
