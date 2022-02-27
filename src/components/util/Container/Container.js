@@ -1,4 +1,5 @@
 import cn from "classnames";
+import { createElement } from "react";
 import styles from "./Container.module.css";
 
 /**
@@ -18,22 +19,26 @@ export default function Container({
   paddingTop,
   paddingBtm,
   paddingX,
+  tag,
+  tabIndex,
 }) {
-  return (
-    <div
-      className={cn(
+  return createElement(
+    tag,
+    {
+      className: cn(
         styles.containerW,
         className && styles[className],
         paddingTop ? styles.paddingTop : null,
         paddingBtm ? styles.paddingBtm : null,
         paddingX ? null : styles.noSidePadding
-      )}
-    >
-      {children && children}
-    </div>
+      ),
+      tabIndex: tabIndex && tabIndex,
+    },
+    children
   );
 }
 
 Container.defaultProps = {
   paddingX: false,
+  tag: "div",
 };

@@ -12,7 +12,7 @@ export default function CardGrid() {
   const { blocks } = useAppContext();
 
   return (
-    <Container tag="ul" className="cardGrid">
+    <Container tag="ul" className="cardGrid" tabIndex="0">
       {blocks &&
         blocks.map((block, i) => {
           return <Card block={block} key={i} idx={i} />;

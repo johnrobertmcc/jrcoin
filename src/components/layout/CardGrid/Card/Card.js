@@ -3,6 +3,8 @@ import styles from "./Card.module.css";
 import { useAppContext } from "../../../../context";
 import cn from "classnames";
 import { shortenAddress } from "../../../../functions";
+import { useRef } from "react";
+
 /**
  * Renders a card to display individual blocks.
  *
@@ -12,6 +14,15 @@ import { shortenAddress } from "../../../../functions";
  */
 export default function Card({ block, idx }) {
   const { activeBlock, setActiveBlock } = useAppContext();
+  const btnRef = useRef(null);
+
+  /**
+   * Function used to focus on the button and change active index.
+   */
+  function focusOnBtn() {
+    btnRef.current.focus();
+    btnRef.current.click();
+  }
 
   if (idx === 0) {
     return (
@@ -26,10 +37,12 @@ export default function Card({ block, idx }) {
       </li>
     );
   }
+
   return (
     <li
       className={cn(styles.block, idx === activeBlock && styles.active)}
-      onClick={() => setActiveBlock(idx)}
+      // tabIndex="0"
+      onClick={() => focusOnBtn()}
     >
       {block?.hash && (
         <h4 className={styles.blockHash}>
@@ -38,9 +51,13 @@ export default function Card({ block, idx }) {
       )}
       <div className={styles.inner}>
         {block?.transactions && (
-          <p>
+          <button
+            onClick={() => setActiveBlock(idx)}
+            ref={btnRef}
+            className={styles.transactionBtn}
+          >
             Transactions: <b>{block.transactions.length}</b>
-          </p>
+          </button>
         )}
         {block?.timestamp && (
           <p>Created: {new Date(block.timestamp).toLocaleDateString()}</p>

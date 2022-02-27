@@ -25,3 +25,7 @@
 .blockHash {
   @apply w-full text-center text-16;
 }
+
+.transactionBtn {
+  @apply p-2;
+}
