@@ -24,7 +24,10 @@ export default function Transactions() {
       <Container>
         <div className={styles.innerWrap}>
           <div className={styles.header}>
-            <h2>Block Transactions</h2>
+            <h2>Block Transactions:</h2>
+            {block?.hash && (
+              <h4 className={styles.hashNum}>Hash #{block.hash}</h4>
+            )}
           </div>
           <>
             {activeBlock !== 0 && block ? (

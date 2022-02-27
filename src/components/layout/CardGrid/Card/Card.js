@@ -45,9 +45,7 @@ export default function Card({ block, idx }) {
       onClick={() => focusOnBtn()}
     >
       {block?.hash && (
-        <h4 className={styles.blockHash}>
-          Block Hash: {shortenAddress(block.hash)}
-        </h4>
+        <h4 className={styles.blockHash}>Hash: {shortenAddress(block.hash)}</h4>
       )}
       <div className={styles.inner}>
         {block?.transactions && (

@@ -6,7 +6,11 @@
 }
 
 .header {
-  @apply flex h-full w-full justify-around px-3;
+  @apply flex h-full w-full justify-around px-3 flex-col;
+}
+
+.hashNum {
+  @apply font-medium pb-5 text-10 md:text-14;
 }
 h2 {
   @apply md:text-h2 text-16 w-full py-5 font-semibold;
