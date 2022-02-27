@@ -14,10 +14,10 @@ export default function Footer() {
         <a
           target="_blank"
           rel="noreferrer"
-          href="https://github.com/johnrobertmcc"
+          href="https://github.com/johnrobertmcc/jrcoin"
           className={styles.gitHub}
         >
-          GitHub
+          Repo
         </a>
         <a
           target="_blank"
@@ -30,7 +30,7 @@ export default function Footer() {
         <a
           target="_blank"
           rel="noreferrer"
-          href="https://www.johnrobertmcc.com/"
+          href="https://github.com/johnrobertmcc"
           className={styles.branding}
         >
           Created by J.R.

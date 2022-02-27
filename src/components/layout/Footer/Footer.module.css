@@ -13,5 +13,5 @@
   @apply rounded-tr-full border-b;
 }
 .branding {
-  @apply rounded-bl-full border-r col-span-2;
+  @apply col-span-2;
 }
