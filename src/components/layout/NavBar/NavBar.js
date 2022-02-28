@@ -3,7 +3,6 @@ import Container from "../../util/Container";
 import Wrapper from "../../util/Wrapper";
 import { shortenAddress } from "../../../functions";
 import { useAppContext } from "../../../context";
-import Loading from "../Loading/Loading";
 
 /**
  * The app's header.
